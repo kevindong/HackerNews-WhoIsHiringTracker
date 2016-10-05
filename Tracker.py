@@ -85,17 +85,18 @@ if len(newJobs) == 0:
 	print("The files generated during this run were deleted.");
 else:
 	print("The following jobs are new: ")
-	diffFile = open("HN_WhoIsHiring/" + currentTime + '.diff.txt', 'w')
+	diffFile = open("HN_WhoIsHiring/" + currentTime + '.diff.html', 'w')
 	h = HTMLParser()
 	for item in newJobs:
 		print(item)
-		diffFile.write('https://news.ycombinator.com/item?id=' + str(item) + '\n')
+		link = 'https://news.ycombinator.com/item?id=' + str(item)
+		diffFile.write('<a href=\"' + link + '\">' + link + '</a></br>')
 		jobDownload = requests.get('https://hacker-news.firebaseio.com/v0/item/' + str(item) + '.json')
 		jobJson = json.loads(jobDownload.text)
 		if ('text' in jobJson):
-			diffFile.write((h.unescape(jobJson['text']) + '\n').encode('utf8'))
-			diffFile.write('=' * 80 + '\n')
+			diffFile.write((h.unescape(jobJson['text']) + '</br>').encode('utf8'))
+			diffFile.write('=' * 80 + '</br>')
 		else:
-			print(str(jobJson['id']) + " was deleted.\n")
+			print(str(jobJson['id']) + " was deleted.</br>")
 	print("Each of those jobs has been saved to: " + "HN_WhoIsHiring/" + currentTime + '.diff.txt')
 	print("\nHappy job hunting!")
