@@ -98,5 +98,5 @@ else:
 			diffFile.write('=' * 80 + '</br>')
 		else:
 			print(str(jobJson['id']) + " was deleted.</br>")
-	print("Each of those jobs has been saved to: " + "HN_WhoIsHiring/" + currentTime + '.diff.txt')
+	print("Each of those jobs has been saved to: " + "HN_WhoIsHiring/" + currentTime + '.diff.html')
 	print("\nHappy job hunting!")
