@@ -67,20 +67,19 @@ if (len(jobsDirectory) == 1):
 	print("The following jobs are new: ")
 	diffFile = open("HN_WhoIsHiring/" + currentTime + '.diff.html', 'w')
 	h = HTMLParser()
-	for item in posts:
+	diffFile.write("<style>hr {margin-top: 25px, margin-bottom: 25px}")
+	for item in newJobs:
 		print(item)
 		link = 'https://news.ycombinator.com/item?id=' + str(item)
 		diffFile.write('<a href=\"' + link + '\">' + link + '</a></br>')
 		jobDownload = requests.get('https://hacker-news.firebaseio.com/v0/item/' + str(item) + '.json')
 		jobJson = json.loads(jobDownload.text)
 		if ('text' in jobJson):
-			diffFile.write((h.unescape(jobJson['text']) + '</br>').encode('utf8'))
-			diffFile.write('=' * 80 + '</br>')
+			diffFile.write((h.unescape(jobJson['text']) + '<hr>').encode('utf8'))
 		else:
-			print(str(jobJson['id']) + " was deleted.</br>")
+			print(str(jobJson['id']) + " was deleted.")
 	print("Each of those jobs has been saved to: " + "HN_WhoIsHiring/" + currentTime + '.diff.html')
 	print("\nHappy job hunting!")
-	exit(0)
 else:
 	print("\tAssumed this program has been previously run...")
 
@@ -103,6 +102,7 @@ else:
 	print("The following jobs are new: ")
 	diffFile = open("HN_WhoIsHiring/" + currentTime + '.diff.html', 'w')
 	h = HTMLParser()
+	diffFile.write("<style>hr {margin-top: 25px, margin-bottom: 25px}</style>")
 	for item in newJobs:
 		print(item)
 		link = 'https://news.ycombinator.com/item?id=' + str(item)
@@ -110,9 +110,8 @@ else:
 		jobDownload = requests.get('https://hacker-news.firebaseio.com/v0/item/' + str(item) + '.json')
 		jobJson = json.loads(jobDownload.text)
 		if ('text' in jobJson):
-			diffFile.write((h.unescape(jobJson['text']) + '</br>').encode('utf8'))
-			diffFile.write('=' * 80 + '</br>')
+			diffFile.write((h.unescape(jobJson['text']) + '<hr>').encode('utf8'))
 		else:
-			print(str(jobJson['id']) + " was deleted.</br>")
+			print(str(jobJson['id']) + " was deleted.")
 	print("Each of those jobs has been saved to: " + "HN_WhoIsHiring/" + currentTime + '.diff.html')
 	print("\nHappy job hunting!")
