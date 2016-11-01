@@ -14,7 +14,7 @@
 
 # ================
 # INSERT URL BELOW
-url = "https://news.ycombinator.com/item?id=12627852"
+url = "https://news.ycombinator.com/item?id=12846216"
 # INSERT URL ABOVE
 # ================
 
