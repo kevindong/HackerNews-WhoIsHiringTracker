@@ -62,11 +62,27 @@ jobsDirectory.sort()
 for item in jobsDirectory:
 	if (('.txt' not in item) or ('diff' in item)):
 		jobsDirectory.remove(item)
-if (len(jobsDirectory) > 1):
-	print("\tAssumed this program has been previously run...")
-else:
-	print("\tAssumed this program has not been previously run...")
+if (len(jobsDirectory) == 1):
+	print("\tThis is the first run. Generating .html file now...")
+	print("The following jobs are new: ")
+	diffFile = open("HN_WhoIsHiring/" + currentTime + '.diff.html', 'w')
+	h = HTMLParser()
+	for item in posts:
+		print(item)
+		link = 'https://news.ycombinator.com/item?id=' + str(item)
+		diffFile.write('<a href=\"' + link + '\">' + link + '</a></br>')
+		jobDownload = requests.get('https://hacker-news.firebaseio.com/v0/item/' + str(item) + '.json')
+		jobJson = json.loads(jobDownload.text)
+		if ('text' in jobJson):
+			diffFile.write((h.unescape(jobJson['text']) + '</br>').encode('utf8'))
+			diffFile.write('=' * 80 + '</br>')
+		else:
+			print(str(jobJson['id']) + " was deleted.</br>")
+	print("Each of those jobs has been saved to: " + "HN_WhoIsHiring/" + currentTime + '.diff.html')
+	print("\nHappy job hunting!")
 	exit(0)
+else:
+	print("\tAssumed this program has been previously run...")
 
 print("Attempting to open previous record: " + jobsDirectory[-2] + '...'),
 previousJobsFile = open("HN_WhoIsHiring/" + jobsDirectory[-2], 'r')
