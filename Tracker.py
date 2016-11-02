@@ -1,4 +1,4 @@
-# WORK IN PROGRESS
+# WORK IN PROGRESS / Now with 100% more spaghetti code (that kinda works)!
 # 
 # Hacker News - Who Is Hiring Tracker
 #
@@ -74,10 +74,13 @@ if (len(jobsDirectory) == 1):
 		diffFile.write('<a href=\"' + link + '\">' + link + '</a></br>')
 		jobDownload = requests.get('https://hacker-news.firebaseio.com/v0/item/' + str(item) + '.json')
 		jobJson = json.loads(jobDownload.text)
-		if ('text' in jobJson):
-			diffFile.write((h.unescape(jobJson['text']) + '<hr>').encode('utf8'))
-		else:
-			print(str(jobJson['id']) + " was deleted.")
+		try:
+			if ('text' in jobJson):
+				diffFile.write((h.unescape(jobJson['text']) + '<hr>').encode('utf8'))
+			else:
+				print(str(jobJson['id']) + " was deleted.")
+		except:
+			print("Unexpected error occured for " + str(item))
 	print("Each of those jobs has been saved to: " + "HN_WhoIsHiring/" + currentTime + '.diff.html')
 	print("\nHappy job hunting!")
 else:
@@ -109,9 +112,12 @@ else:
 		diffFile.write('<a href=\"' + link + '\">' + link + '</a></br>')
 		jobDownload = requests.get('https://hacker-news.firebaseio.com/v0/item/' + str(item) + '.json')
 		jobJson = json.loads(jobDownload.text)
-		if ('text' in jobJson):
-			diffFile.write((h.unescape(jobJson['text']) + '<hr>').encode('utf8'))
-		else:
-			print(str(jobJson['id']) + " was deleted.")
+		try:
+			if ('text' in jobJson):
+				diffFile.write((h.unescape(jobJson['text']) + '<hr>').encode('utf8'))
+			else:
+				print(str(jobJson['id']) + " was deleted.")
+		except:
+			print("Unexpected error occured for " + str(item))
 	print("Each of those jobs has been saved to: " + "HN_WhoIsHiring/" + currentTime + '.diff.html')
 	print("\nHappy job hunting!")
