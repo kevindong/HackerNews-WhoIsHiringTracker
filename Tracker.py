@@ -14,7 +14,7 @@
 
 # ================
 # INSERT URL BELOW
-url = "https://news.ycombinator.com/item?id=12846216"
+url = "https://news.ycombinator.com/item?id=13080280"
 # INSERT URL ABOVE
 # ================
 
@@ -68,7 +68,7 @@ if (len(jobsDirectory) == 1):
 	diffFile = open("HN_WhoIsHiring/" + currentTime + '.diff.html', 'w')
 	h = HTMLParser()
 	diffFile.write("<style>hr {margin-top: 25px, margin-bottom: 25px}")
-	for item in newJobs:
+	for item in posts:
 		print(item)
 		link = 'https://news.ycombinator.com/item?id=' + str(item)
 		diffFile.write('<a href=\"' + link + '\">' + link + '</a></br>')
@@ -83,6 +83,7 @@ if (len(jobsDirectory) == 1):
 			print("Unexpected error occured for " + str(item))
 	print("Each of those jobs has been saved to: " + "HN_WhoIsHiring/" + currentTime + '.diff.html')
 	print("\nHappy job hunting!")
+	exit(0)
 else:
 	print("\tAssumed this program has been previously run...")
 
