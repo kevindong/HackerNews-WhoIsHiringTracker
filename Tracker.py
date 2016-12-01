@@ -67,7 +67,7 @@ if (len(jobsDirectory) == 1):
 	print("The following jobs are new: ")
 	diffFile = open("HN_WhoIsHiring/" + currentTime + '.diff.html', 'w')
 	h = HTMLParser()
-	diffFile.write("<style>hr {margin-top: 25px, margin-bottom: 25px}")
+	diffFile.write("<style>hr {margin-top: 25px, margin-bottom: 25px}</style>")
 	for item in posts:
 		print(item)
 		link = 'https://news.ycombinator.com/item?id=' + str(item)
